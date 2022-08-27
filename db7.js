@@ -1,6 +1,6 @@
 function send( item, c ){  //item, c=title or ls
     let req = new XMLHttpRequest();
-    req.open("GET","http://localhost/DPMTM/rcvtm7.php?item="+item+"&c="+c+"&date="+gettime()+"&user="+user );
+    req.open("GET","https://pacific-scrubland-78772.herokuapp.com/rcvtm7.php?item="+item+"&c="+c+"&date="+gettime()+"&user="+user );
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200 ){
             console.log( "send()","item", item, "c", c );
@@ -12,7 +12,7 @@ function send( item, c ){  //item, c=title or ls
 
 function rcvtm( item, f1, f2, x1, x2, x3, cvs, n5, n4, n1, n2, n3, f3 ){  //item1=ls, item2=title
     let req = new XMLHttpRequest();
-    req.open("GET","http://localhost/DPMTM/sendtm5.php?date="+ item+"&user="+user );
+    req.open("GET","https://pacific-scrubland-78772.herokuapp.com/sendtm5.php?date="+ item+"&user="+user );
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200 ){
             console.log( "date", item );
@@ -50,7 +50,7 @@ function rcvtm( item, f1, f2, x1, x2, x3, cvs, n5, n4, n1, n2, n3, f3 ){  //item
 
 function sendpm( id, item1, t, c ){
     let req = new XMLHttpRequest();
-    req.open("GET","http://localhost/DPMTM/rcvpm3.php?id="+id+"&name="+item1+"&title="+t+"&c="+c+"&user="+user );
+    req.open("GET","https://pacific-scrubland-78772.herokuapp.com/rcvpm3.php?id="+id+"&name="+item1+"&title="+t+"&c="+c+"&user="+user );
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200 ){
             console.log( "sendpm()" );
@@ -63,7 +63,7 @@ function sendpm( id, item1, t, c ){
 
 function rcvpmtitle( f ){
     let req = new XMLHttpRequest();
-    req.open("GET","http://localhost/DPMTM/sendpmtitle3.php?user="+user );
+    req.open("GET","https://pacific-scrubland-78772.herokuapp.com/sendpmtitle3.php?user="+user );
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200 ){
             console.log( "rcvpmtitle()" );
@@ -82,7 +82,7 @@ function rcvpmtitle( f ){
 
 function rcvpm( t, f, f2 ){
     let req = new XMLHttpRequest();
-    req.open("GET","http://localhost/DPMTM/sendpm3.php?title="+t+"&user="+user );
+    req.open("GET","https://pacific-scrubland-78772.herokuapp.com/sendpm3.php?title="+t+"&user="+user );
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200 ){
             console.log( "rcvpm()" );
@@ -104,7 +104,7 @@ function rcvpm( t, f, f2 ){
 
 function sendcmpc( a, b, c, d, e ){
     let req = new XMLHttpRequest();
-    req.open("GET","http://localhost/DPMTM/rcvcmpc3.php?title="+a+"&id="+b+"&m="+c+"&d="+d+"&c="+e+"&user="+user );
+    req.open("GET","https://pacific-scrubland-78772.herokuapp.com/rcvcmpc3.php?title="+a+"&id="+b+"&m="+c+"&d="+d+"&c="+e+"&user="+user );
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200 ){
             console.log( "sendcmpc()" );
@@ -116,7 +116,7 @@ function sendcmpc( a, b, c, d, e ){
 function rcvcmpc( a ){
     console.log( "a", a );
     let req = new XMLHttpRequest();
-    req.open("GET","http://localhost/DPMTM/sendcmpc3.php?title="+a+"&user="+user );
+    req.open("GET","https://pacific-scrubland-78772.herokuapp.com/sendcmpc3.php?title="+a+"&user="+user );
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200 ){
             console.log( "rcvcmpc()" );
