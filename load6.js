@@ -76,12 +76,15 @@ function(){
     btn6 = document.getElementById( "btn6" );
     btn7 = document.getElementById( "btn7" );
     homemenu = document.getElementById( "homemenu" );
+    /*
     let url = document.location.search;
     let result = url.replace( /^\?/ , "" );
     let result2 = result.split( "&" );
     user = result2[0];
     pass = result2[1];
-    console.log( "user", user, "pass", pass );
+    console.log( "user", user, "pass", pass );*/
+    user = "2020m0030";
+    pass = "asika1104";
 
     
 
