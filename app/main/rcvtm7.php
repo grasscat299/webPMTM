@@ -11,7 +11,7 @@ if( $item1 != "" ){
     $nasi = 1;
 }
 
-$json = file_get_contents( "test2.json" );
+$json = file_get_contents( "../test2.json" );
 $sql = json_decode( $json, true );
 $dsn = "pgsql:dbname=".$sql["dbname"].";host=".$sql["host"];
 $pdo = new PDO( $dsn, $sql["user"], $sql["pass"] );

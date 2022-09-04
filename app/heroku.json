@@ -1,0 +1,6 @@
+{
+    "log" : "https://pacific-scrubland-78772.herokuapp.com/log/",
+    "login" : "https://pacific-scrubland-78772.herokuapp.com/login/",
+    "main" : "https://pacific-scrubland-78772.herokuapp.com/main/",
+    "tmsheet" : "https://pacific-scrubland-78772.herokuapp.com/tmsheet/"
+}

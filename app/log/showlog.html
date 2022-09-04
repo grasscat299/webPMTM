@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="../seturl.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <input type="text" id="fname">拡張子かいちゃだめ
+        <input type="button" id="btn" value="log確認">
+        <br>
+        <div id="logs"></div>
+    </body>
+</html>
+<script>
+    var gyou;
+    var p=[];
+    $( "#btn" ).click(
+        function(){
+            let req = new XMLHttpRequest();
+            req.open("GET",ajaxurl["log"]+"logs/"+$( "#fname" ).val()+".log" );
+            req.onreadystatechange = function(){
+                if(req.readyState == 4 && req.status == 200 ){
+                    let bun = req.responseText;
+                    gyou = bun.split( /\r\n|\n/ );
+                    inp();
+                }
+            };
+            req.send();
+        }
+    )
+    
+
+    function inp(){
+        for( let a = 0; a < p.length; a ++ ){
+            console.log( "a", a );
+            p[a].remove();
+        }
+        for( let a = 0; a < gyou.length; a ++ ){
+            $( "#logs" ).append( "<span>"+gyou[a]+"</span><br>" );
+        }
+        p = $( "p" );
+    }
+    //localhost/test/showlog.html
+</script>

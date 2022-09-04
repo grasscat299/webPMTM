@@ -32,15 +32,16 @@ let pw=0,pp=0,py1=0,py2=0,py3=0,py4=0,px1=0,px2=0,px3=0,px4=0,px5=0,px6=0,px7=0,
 
 //page
 let home,homemenu,tsnum;
-let btn5,btn6,btn7;
+let btn5,btn6,btn7,btn8;
 let user,pass;
 
-
+var log=[];
 
 //load時
 window.addEventListener( "load",
 function(){
-    console.log( "load" );
+    console.log( "load {" );
+	log[log.length]='(load7.js)'+'load {';
 
     //dom要素取得
     //TM
@@ -75,23 +76,22 @@ function(){
     btn5 = document.getElementById( "btn5" );
     btn6 = document.getElementById( "btn6" );
     btn7 = document.getElementById( "btn7" );
+    btn8 = document.getElementById( "btn8" );
     homemenu = document.getElementById( "homemenu" );
-    /*
+
     let url = document.location.search;
     let result = url.replace( /^\?/ , "" );
     let result2 = result.split( "&" );
     user = result2[0];
     pass = result2[1];
-    console.log( "user", user, "pass", pass );*/
-    user = "2020m0030";
-    pass = "asika1104";
+    console.log( "user", user, "pass", pass );
+	log[log.length]='(load7.js)'+'user'+user+'pass'+pass;
 
-    
 
     //tm読込
     page();
     nd = 0;
-    rcvtm( gettime(), setdai, drow, dai, ls, title, tcvs, gettime2(nd) ); //データ取得
+    rcvtm( nd, tcvs ); //データ取得
 
     //pm読込
     rcvpmtitle( rcvpm );  
@@ -105,6 +105,7 @@ function(){
     function (){
         //tm
         console.log( "hide tm" );
+		log[log.length]='(load7.js)'+'hide tm';
         ctxm.style.display="none";
 
         //pm
@@ -113,8 +114,10 @@ function(){
         }
 
         console.log( "cc", cc );
+		log[log.length]='(load7.js)'+'cc'+cc;
         if( cc >= 2 && pg >= 1 && pg <= 4 ){
             console.log( "hide" );
+			log[log.length]='(load7.js)'+'hide';
             editmenu.style.display="none";
             if( pg == 1 ){
                 pg = 0;
@@ -128,6 +131,8 @@ function(){
         }
 
         if( pg2 == 7 ){
+            console.log( "cmpc month change" );
+			log[log.length]='(load7.js)'+'cmpc month change';
             let a = cmpc[ cfp*3+1 ].length;
             if( a == 0 ){
                 cmpc[ cfp*3+1 ] = "00";
@@ -137,6 +142,8 @@ function(){
                 sendcmpc( pmti[nt], cmpc[cfp*3], cmpc[cfp*3+1],cmpc[cfp*3+2], "e" );
             }
         }else if( pg2 == 8 ){
+            console.log( "cmpc date change" );
+			log[log.length]='(load7.js)'+'cmpc date change';
             let a = cmpc[ cfp*3+1 ].length;
             if( a == 0 ){
                 cmpc[ cfp*3+2 ] = "00";
@@ -148,10 +155,12 @@ function(){
         }
 
         if( tg == "w" ){
-            console.log( "tgw" );
             textform.focus();
         }
     },
     false );
+
+    console.log( "}" );
+	log[log.length]='(load7.js)'+'}';
 },
 false );

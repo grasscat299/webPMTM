@@ -1,5 +1,6 @@
 function setarea( np ){
     console.log( "setarea {" );
+	log[log.length]='(tm12.js)'+'setarea {';
     let b = 0;
     
     if( sp < 96 ){
@@ -16,11 +17,15 @@ function setarea( np ){
     let key = 0;
     let c = 0;
     console.log( "np", np );
+	log[log.length]='(tm12.js)'+'np'+np;
     console.log( "a!=", np+b );
+	log[log.length]='(tm12.js)'+'a!='+np;
     if( np != 95 && np != 191 ){
         for( let a = sp; a != np+b && c < 96; a += b ){
             console.log( "setarea()-a", a );
+			log[log.length]='(tm12.js)'+'setarea()-a'+a;
             console.log( "dai", dai[a+v], "key", key, "a", a, "v", v );
+			log[log.length]='(tm12.js)'+'dai'+dai+'key'+key+'a'+a+'v'+v;
 
             for( let d = 0; d < ls.length/2; d ++ ){
                 if( a >= ls[d*2] && a <= ls[d*2+1] && d != fp ){
@@ -34,15 +39,19 @@ function setarea( np ){
                     return "f";
                 }
                 console.log( "setarea-eror" );
+				log[log.length]='(tm12.js)'+'setarea-eror';
                 arb = a-b;
                 a = np;
                 console.log( "a", a );
+				log[log.length]='(tm12.js)'+'a'+a;
             }
             c ++;
         }
     }
     console.log( "arb", arb, "sp", sp  );
+	log[log.length]='(tm12.js)'+'arb'+arb+'sp'+sp;
     console.log( "fp", fp );
+	log[log.length]='(tm12.js)'+'fp'+fp;
     if( tg == "a" ){
         ls[fp*2] = Math.min( sp, arb );
         ls[fp*2+1] = Math.max( sp, arb );
@@ -52,29 +61,26 @@ function setarea( np ){
         ls[fp*2+1] = arb;
     }
     console.log( "}" );
+	log[log.length]='(tm12.js)'+'}';
     return "t";
 }
 
-function drow( cvs, n5, n4, n, n2, n3 ){   //n=何行目か n2=周りの余白x n3=余白y n4=normal or ts
-    if( n == undefined ) n = 0;
-    if( n2 == undefined ) n2 = 0;
-    if( n3 == undefined ) n3 = 0;
-    if( n4 == undefined ) n4 = "normal";
-
-    if( n == 0 ){
-        cvs.fillStyle = "#fff";
-        cvs.fillRect( n2, n3, wi, wy*2 );
-    }
+function drow( cvs, n5 ){   //cvs, n5 = date
+    console.log( "drow" );
+	log[log.length]='(tm12.js)'+'drow';
+    cvs.fillStyle = "#fff";
+    cvs.fillRect( 0, 0, wi, wy*2 );
     
-    TM( cvs, n, n2, n3, n4, n5 );
+    TM( cvs, n5 );
 
     cvs.fillStyle = "rgba(0,0,255,0.5)";
     for( let a = 0; a < 192; a ++ ){
         if( dai[a] != "" ){
-            if( a < 96 ) cvs.fillRect( n2+wh+wx*a, n3+n*wy*2, wx, wy );
-            else cvs.fillRect( n2+wh+wx*( a-96 ), n3+wy+n*wy*2, wx, wy);
+            if( a < 96 ) cvs.fillRect( wh+wx*a, 0, wx, wy );
+            else cvs.fillRect( wh+wx*( a-96 ), wy, wx, wy);
         }
     }
+
     cvs.strokeStyle = "black";
     let b = 0;
     for( let a = 0; a < ls.length; a ++ ){
@@ -85,47 +91,39 @@ function drow( cvs, n5, n4, n, n2, n3 ){   //n=何行目か n2=周りの余白x 
             b = ls[a]+1;
         }
         if( ls[a] < 96 ){
-            console.log( "ls[a] < 96" );
-            cvs.moveTo( n2+wh+b*wx, n3+n*wy*2 );
-            cvs.lineTo( n2+wh+b*wx, n3+wy+n*wy*2 );
+            cvs.moveTo( wh+b*wx, 0 );
+            cvs.lineTo( wh+b*wx, wy );
         }else{
-            console.log( "ls[a] > 96" );
-            cvs.moveTo( n2+wh+( b-96 )*wx, n3+wy+n*wy*2 );
-            cvs.lineTo( n2+wh+( b-96 )*wx, n3+wy*2+n*wy*2 );                
+            cvs.moveTo( wh+( b-96 )*wx, wy );
+            cvs.lineTo( wh+( b-96 )*wx, wy*2 );                
         }
         cvs.stroke();
         cvs.closePath();
     }
     for( let a = 0; a < ls.length/2; a ++ ){
-        tategaki( title[a], ls[a*2], ls[a*2+1], cvs, n, n2, n3 );
+        tategaki( title[a], ls[a*2], ls[a*2+1], cvs );
     }
-
-    /*cvs2.toBlob( function(blob){
-        tsdl.href = window.URL.createObjectURL( blob );
-    })*/
 }
 
-function TM( cvs, n, n2, n3, n4, n5 ){ //n=何行目 n4=normal or ts n2=yohakuX n3=yohakuY n5=date
-    console.log("TM() {");
-
-    console.log( "n", n );
-
+function TM( cvs, n5 ){ //n=何行目 n4=normal or ts n2=yohakuX n3=yohakuY n5=date
+    console.log( "TM" );
+	log[log.length]='(tm12.js)'+'TM';
     //升目を描画
     cvs.strokeStyle = "black";
     cvs.beginPath();
     cvs.setLineDash( ["",""] );
-    cvs.moveTo( n2+wh, n3+n*wy*2 );
-    cvs.lineTo( n2+wh, n3+wy*2+n*wy*2 );
-    cvs.moveTo( n2+wh+wx*96, n3+n*wy*2 );
-    cvs.lineTo( n2+wh+wx*96, n3+wy*2+n*wy*2 );
+    cvs.moveTo( wh, 0 );
+    cvs.lineTo( wh, wy*2 );
+    cvs.moveTo( wh+wx*96, 0 );
+    cvs.lineTo( wh+wx*96, wy*2 );
     cvs.stroke();
     cvs.closePath();
     for( let a = 1; a < 24; a ++ ){
         //線を描画
         cvs.beginPath();
         cvs.setLineDash( [ 10, 10 ] );
-        cvs.moveTo( n2+wh+a*wx*4, n3+n*wy*2 );
-        cvs.lineTo( n2+wh+a*wx*4, n3+wy*2+n*wy*2 );
+        cvs.moveTo( wh+a*wx*4, 0 );
+        cvs.lineTo( wh+a*wx*4, wy*2 );
         cvs.stroke(); 
         cvs.closePath();
     }
@@ -134,8 +132,8 @@ function TM( cvs, n, n2, n3, n4, n5 ){ //n=何行目 n4=normal or ts n2=yohakuX 
         if( a%2 == 1 ){
             cvs.beginPath();
             cvs.setLineDash( [ 5, 5 ] );
-            cvs.moveTo( n2+wh+a*wx*2, n3+n*wy*2 );
-            cvs.lineTo( n2+wh+a*wx*2, n3+wy*2+n*wy*2 );
+            cvs.moveTo( wh+a*wx*2, 0 );
+            cvs.lineTo( wh+a*wx*2, wy*2 );
             cvs.stroke();
             cvs.closePath();
         }
@@ -149,7 +147,7 @@ function TM( cvs, n, n2, n3, n4, n5 ){ //n=何行目 n4=normal or ts n2=yohakuX 
         }else{
             b = a;
         }
-        cvs.fillText( b, n2+wh+wx*(a-4)*4, n3+n*wy*2+wy );
+        cvs.fillText( b, wh+wx*(a-4)*4, wy );
         
     }
 
@@ -159,26 +157,25 @@ function TM( cvs, n, n2, n3, n4, n5 ){ //n=何行目 n4=normal or ts n2=yohakuX 
     cvs.setLineDash([]);
     cvs.globalAlpha = 1.0;
 
-    cvs.moveTo( n2, n3+n*wy*2 );
-    cvs.lineTo( n2+wi, n3+n*wy*2 );
+    cvs.moveTo( 0, 0 );
+    cvs.lineTo( wi, 0 );
 
-    cvs.moveTo( n2, n3+n*wy*2 );
-    cvs.lineTo( n2, n3+n*wy*2+wy*2 );
+    cvs.moveTo( 0, 0 );
+    cvs.lineTo( 0, wy*2 );
 
-    cvs.moveTo( n2+wh, n3+wy+n*wy*2 );
-    cvs.lineTo( n2+wi, n3+wy+n*wy*2 );
+    cvs.moveTo( wh, wy );
+    cvs.lineTo( wi, wy );
 
-    cvs.moveTo( n2, n3+wy*2+n*wy*2 );
-    cvs.lineTo( n2+wi, n3+wy*2+n*wy*2 );
+    cvs.moveTo( 0, wy*2 );
+    cvs.lineTo( wi, wy*2 );
 
-    cvs.moveTo( n2+1+dx*4, n3+dh+n*wy*2 );
-    cvs.lineTo( n2+1, n3+dh+dx*4+n*wy*2 );
-    if( n4 == "normal" ){
-        cvs.moveTo( n2, n3+bh );
-        cvs.lineTo( n2+wh, n3+bh );
-        cvs.moveTo( n2, n3+bh+hh );
-        cvs.lineTo( n2+wh, n3+bh+hh );
-    }
+    cvs.moveTo( 1+dx*4, dh );
+    cvs.lineTo( 1, dh+dx*4 );
+
+    cvs.moveTo( 0, bh );
+    cvs.lineTo( wh, bh );
+    cvs.moveTo( 0, bh+hh );
+    cvs.lineTo( wh, bh+hh );
     cvs.stroke();
 
     cvs.fillStyle="black";
@@ -186,36 +183,30 @@ function TM( cvs, n, n2, n3, n4, n5 ){ //n=何行目 n4=normal or ts n2=yohakuX 
 
     let m = n5.getMonth()+1;
     let da = n5.getDate();
-    if( m < 10 ){
-        m = "0"+m;
-    }
-    if( da < 10 ){
-        da = "0"+da;
-    }
-    cvs.fillText( m, n2+1, n3+dh+dx*2+n*wy*2 );
-    cvs.fillText( da, n2+1+dx*2, n3+dh+dx*4+n*wy*2 );
-    cvs.fillText( Youbi[n5.getDay()], n2+1+dx, n3+bh+hh-dx+n*wy*2 );
+    m = ( "0"+m ).slice( -2 );
+    da = ( "0"+da ).slice( -2 );
+
+    cvs.fillText( m, 1, dh+dx*2 );
+    cvs.fillText( da, 1+dx*2, dh+dx*4);
+    cvs.fillText( Youbi[n5.getDay()], 1+dx, bh+hh-dx );
     return;
 }
 
 
 
-function tategaki( text, xa, xb, cvs, n, n2, n3 ){
-    console.log( "tategaki()" );
-    xa = Number( xa );
-    xb = Number( xb );
-    console.log( "text", text, "xa", xa, "xb", xb );
-
+function tategaki( text, xa, xb, cvs ){
+    console.log( "tategaki" );
+	log[log.length]='(tm12.js)'+'tategaki';
     cvs.fillStyle = "black";
     let a = text.split("");
     cvs.font = font+"px serif";
     let x, y;
     if( xa < 96 ){
-        x = n2+wh+(xa*wx + (xb+1)*wx)/2-font/2;
-        y = n*wy*2+font;
+        x = wh+(xb+1+xa)*wx/2-font/2;
+        y = font;
     }else{
-        x = n2+wh+( ( xa-96 )*wx + ( ( xb-95 )*wx) )/2-font/2;
-        y = n*wy*2+n3+wy+font;
+        x = wh+( ( xa-96 )*wx + ( ( xb-95 )*wx) )/2-font/2;
+        y = wy+font;
     } 
     for(let b = 0; b < a.length; b ++ ){
         cvs.fillText( a[b], x, y );
@@ -223,33 +214,40 @@ function tategaki( text, xa, xb, cvs, n, n2, n3 ){
     }
 }
 
-function setdai( v1, v2, v3 ){   //v1=dai,v2=ls,v3=title
+function setdai(){   //v1=dai,v2=ls,v3=title
+    console.log( "setdai" );
+	log[log.length]='(tm12.js)'+'setdai';
     for( let a = 0; a < 192; a ++ ){
-        v1[a] = "";
+        dai[a] = "";
     }
-    for( let b = 0; b < v2.length/2; b ++ ){
+    for( let b = 0; b < ls.length/2; b ++ ){
         for( let a = 0; a < 192; a ++ ){
-            if( v2[b*2] <= a && v2[b*2+1] >= a ){
-                
-                v1[ a ] = v3[b];
+            if( ls[b*2] <= a && ls[b*2+1] >= a ){
+                dai[ a ] = title[b];
             }
         }
     }
-    console.log( "dai", v1, "ls", v2, "title", v3 );
-    console.log( "fp", fp );
     return;
 }
 
 function setfp( b ){
+    console.log( "setfp {" );
+	log[log.length]='(tm12.js)'+'setfp {';
     for( let a = 0; a < ls.length/2; a ++ ){
         if( ls[a*2] <= b && ls[a*2+1] >= b ){
+            console.log( "}" );
+			log[log.length]='(tm12.js)'+'}';
             return a;
         }
     }
+    console.log( "}" );
+	log[log.length]='(tm12.js)'+'}';
     return "null";
 }
 
 function settp( x, y ){
+    console.log( "setfp" );
+	log[log.length]='(tm12.js)'+'setfp';
     if( x <= wh ){
         if( y <= bh ){
             return 192;
@@ -259,6 +257,7 @@ function settp( x, y ){
     }else if( x > wh && x < wh+wx*96 ){
         if( y < wy ){
             console.log((x-wh)/wx );
+			log[log.length]='(tm12.js)'+(x-wh)/wx;
             return Math.floor( (x-wh)/wx );
         }else{
             return Math.floor( (x-wh)/wx ) + 96;
@@ -266,9 +265,11 @@ function settp( x, y ){
     }else{
         if( y < wy/2 ){
             console.log( "maru" );
+			log[log.length]='(tm12.js)'+'maru';
             return Math.floor( (x-wh-wx*96)/wt )+193;
         }else if( y < wy ){
             console.log( "maru2" );
+			log[log.length]='(tm12.js)'+'maru2';
             return Math.floor( (x-wh-wx*96)/wt )+198;
         }else if( x >= wh+wx*96+wt*2 ){
             if( y < wy*1.5 ){
@@ -282,42 +283,38 @@ function settp( x, y ){
     }
 }
 
-function gettime(){ //時間データ
-    console.log( "nd", nd );
-    let nt2 = new Date();
-    nt2.setDate( nt2.getDate() + nd );
-    let ny = nt2.getFullYear();
-    let nmo = nt2.getMonth()+1;
-    let nd1 = nt2.getDate();
-    if( nmo < 10 ) nmo = "0"+nmo;
-    if( nd1 < 10 ) nd1 = "0"+nd1;
-    return String(ny) + String(nmo) + String(nd1);
-}
-
-function gettime2( a ){
-    console.log( "nd", a );
-    let nt2 = new Date();
-    nt2.setDate( nt2.getDate() + a );
-    return nt2;
-}
-
-function setwy2( a ){
-    return a%wy*2;
+function gettime( n, c ){   //n=nd c=string or data
+    let nt = new Date();
+    nt.setDate( nt.getDate() + n );
+    if( c == "string" ){
+        let ny = nt.getFullYear();
+        let nmo = nt.getMonth()+1;
+        let nd1 = nt.getDate();
+        nmo = ("0"+nmo).slice( -2 );
+        nd1 = ("0"+nd1).slice( -2 );
+        return String(ny) + String(nmo) + String(nd1);
+    }else{
+        return nt;
+    }
 }
 
 //前日のTMを見る
 function backdate(){
+    console.log( "backdate" );
+	log[log.length]='(tm12.js)'+'backdate';
     nd --;
     if( nd > -99 ){
-        rcvtm( gettime(), setdai, drow, dai, ls, title, tcvs, gettime2(nd) );
+        rcvtm( nd, tcvs );
     }
 }
 
 //明日のＴＭを見る
 function nextdate(){
+    console.log( "nextdate" );
+	log[log.length]='(tm12.js)'+'nextdate';
     nd ++;
     if( nd < 99 ){
-        rcvtm( gettime(), setdai, drow, dai, ls, title, tcvs, gettime2(nd) );
+        rcvtm( nd, tcvs );
     }
 }
 
@@ -325,22 +322,29 @@ function tmaddE(){
     //右クリック検知
     tmcvs.addEventListener('contextmenu',
     function (e){
+        console.log( "tmcvs ctxmenu {" );
+		log[log.length]='(tm12.js)'+'tmcvs ctxmenu {';
         if( tg == "n" ){
             console.log( "contextmenu" );
+			log[log.length]='(tm12.js)'+'contextmenu';
             ctxm.style.left=e.clientX+"px";
             ctxm.style.top=e.clientY+"px";
             ctxm.style.display="block";
             tp = settp( e.offsetX, e.offsetY );
             tg = "c";
         }
-        console.log( "tg", tg );
+        console.log( "tg", tg, "tp", tp );
+		log[log.length]='(tm12.js)'+'tg'+tg+'tp'+tp;
+        console.log( "}" );
+		log[log.length]='(tm12.js)'+'}';
     },
     false );
 
     //名前変更
     ctxm1.addEventListener( "mousedown",
     function(){
-        console.log( "ctxm1 click" );
+        console.log( "ctxm1 click {" );
+		log[log.length]='(tm12.js)'+'ctxm1 click {';
         fp = setfp( tp );
         if( fp != "null" && tg == "c" ){
             tg = "w";
@@ -353,19 +357,25 @@ function tmaddE(){
                 a = wy*1.75;
                 b = wh+(ls[fp*2+1]-96)*wx+1
             }
-            console.log( "a", a, "b", b );
             textform.style.top = a + "px";
             textform.style.left = b + "px";
             textform.value = "";
-            textform.style.display = "block";
+            textform.style.display = "block";  
         }
+        console.log( "tg", tg, "fp", fp, "tp", tp );
+		log[log.length]='(tm12.js)'+'tg'+tg+'fp'+fp+'tp'+tp;
+        console.log( "}" );
+		log[log.length]='(tm12.js)'+'}';
     },
     false );
 
     //削除
     ctxm2.addEventListener( "mousedown",
     function(){
+        console.log( "ctxm2 click {" );
+		log[log.length]='(tm12.js)'+'ctxm2 click {';
         console.log( "tg", tg );
+		log[log.length]='(tm12.js)'+'tg'+tg;
         if( tg == "c" ){
             fp = setfp( tp );
             if( fp != "null" ){
@@ -375,23 +385,29 @@ function tmaddE(){
             tg = "n";
             send( ls, "ls" );
             send( title, "title" );
-            setdai( dai, ls, title );
-            drow( tcvs, gettime2( nd ) );
-        }  
+            setdai();
+            drow( tcvs, gettime( nd, "data" ) );
+        }
+        console.log( "tg", tg, "fp", fp );
+		log[log.length]='(tm12.js)'+'tg'+tg+'fp'+fp;
+        console.log( "}" );
+		log[log.length]='(tm12.js)'+'}';
     },
     false );
 
     //canvas内でのmousedown検知
     tmcvs.addEventListener( "mousedown", 
     function(e){
-        console.log( "cvs mousedown" );
+        console.log( "cvs mousedown {" );
+		log[log.length]='(tm12.js)'+'cvs mousedown {';
+        console.log( "tg", tg );
+		log[log.length]='(tm12.js)'+'tg'+tg;
         if( tg == "n" && e.button == 0 ){
-            wy2 = setwy2( e.offsetY );  //上から何行目のTMか
             tp = settp( e.offsetX, e.offsetY );
             console.log( "tp", tp );
+			log[log.length]='(tm12.js)'+'tp'+tp;
             if( tp < 192 ){
                 if( dai[ tp ] == "" ){
-                    console.log( "dai", dai, "ls", ls, "title", title  );
                     sp = tp;
                     tg = "a";
                     title[ fp ] = "UNNAMED";
@@ -399,21 +415,28 @@ function tmaddE(){
                     let a = e.offsetX - tp%96*wx-wh;
                     if( a < 5 && dai[ tp-1 ] != dai[ tp ]){
                         console.log( "a < 5" );
+						log[log.length]='(tm12.js)'+'a < 5';
                         tg = "er";
                         fp = setfp( tp );
                         sp = ls[fp*2+1];
                     }else if( dai[ tp+1 ] != dai[ tp ] ){
                         console.log( "a >= 5" );
+						log[log.length]='(tm12.js)'+'a >= 5';
                         tg = "el";
                         fp = setfp( tp );
                         sp = ls[fp*2];
                     }         
                 }
+                console.log( "sp", sp, "tg", tg, "fp", fp );
+				log[log.length]='(tm12.js)'+'sp'+sp+'tg'+tg+'fp'+fp;
+                console.log( "dai", dai, "ls", ls, "title", title );
+				log[log.length]='(tm12.js)'+'dai'+dai+'ls'+ls+'title'+title;
                 let a = setarea( tp );
-                console.log( a );
+                console.log( "a", a );
+				log[log.length]='(tm12.js)'+'a'+a;
                 if( a == "t" ){
-                    setdai( dai, ls, title );
-                    drow( tcvs, gettime2( nd ) );
+                    setdai();
+                    drow( tcvs, gettime( nd, "data" ) );
                 }
                 
             }else if( tp == 192 ){
@@ -428,12 +451,18 @@ function tmaddE(){
 
             }
         }
+        console.log( "}" );
+		log[log.length]='(tm12.js)'+'}';
     },
     false )
 
     //canvas内でのmouseup検知
     tmcvs.addEventListener( "mouseup",
     function(){
+        console.log( "cvs mouseup {" );
+		log[log.length]='(tm12.js)'+'cvs mouseup {';
+        console.log( "tg", tg );
+		log[log.length]='(tm12.js)'+'tg'+tg;
         if( tg == "a" || tg == "er" || tg == "el" ){
             fp = ls.length/2;
             tg = "n";
@@ -441,8 +470,10 @@ function tmaddE(){
             send( title, "title", nd );
         }
         sp = 0;
-        console.log( "fp", fp );
-        
+        console.log( "fp", fp, "tg", tg, "sp", sp );
+		log[log.length]='(tm12.js)'+'fp'+fp+'tg'+tg+'sp'+sp;
+        console.log( "}" );
+		log[log.length]='(tm12.js)'+'}';
     },
     false );
 
@@ -450,12 +481,16 @@ function tmaddE(){
     tmcvs.addEventListener( "mousemove",
     function(e){
         if( tg == "a" || tg == "er" || tg == "el" ){
+            console.log( "cvs mousemove {" )
+			log[log.length]='(tm12.js)'+'cvs mousemove {';
             tp = settp( e.offsetX, e.offsetY);
             if( tp > 191 ){
                 tp = 191;
             }
-            console.log( "tp", tp );
+            console.log( "dtp", dtp );
+			log[log.length]='(tm12.js)'+'dtp'+dtp;
             if( dtp != tp ){
+                
                 if( tg == "er" ){
                     if( tp > sp ){
                         tp = sp;
@@ -465,15 +500,19 @@ function tmaddE(){
                         tp = sp;
                     }
                 }
+                console.log( "tp", tp , "tg", tg );
+				log[log.length]='(tm12.js)'+'tp'+tp+'tg'+tg;
                 let a = setarea( tp );
                 if( a == "t" ){
-                    setdai( dai, ls, title );
-                    drow( tcvs, gettime2(nd) );
+                    setdai();
+                    drow( tcvs, gettime(nd, "data") );
                 }
                 
             }
             dtp = tp;
-        }
+            console.log( "}" );
+			log[log.length]='(tm12.js)'+'}';
+        }   
     },
     false );
 
@@ -482,16 +521,21 @@ function tmaddE(){
     function(e){
         if( tg == "w" ){
             if( e.key === "Enter" ){
-                console.log( "press Enter", textform.value );
+                console.log( "press Enter{" );
+				log[log.length]='(tm12.js)'+'press Enter{';
                 console.log( "fp", fp );
+				log[log.length]='(tm12.js)'+'fp'+fp;
                 textform.style.display = "none";
                 title[fp] = textform.value;
                 send( title, "title" );
-                setdai( dai, ls, title );
-                drow( tcvs, gettime2( nd ) );
-                console.log( "dai", dai );
+                setdai();
+                drow( tcvs, gettime( nd, "data" ) );
                 tg = "n";
                 fp = ls.length/2;
+                console.log( "tg", tg, "fp", fp );
+				log[log.length]='(tm12.js)'+'tg'+tg+'fp'+fp;
+                console.log( "}" );
+				log[log.length]='(tm12.js)'+'}';
             }
         }   
     },

@@ -2,18 +2,21 @@ function pmaddE(){
     em1.addEventListener( "mousedown",
     function(){
         console.log( "edit name" );
+		log[log.length]='(pm7.js)'+'edit name';
         pmtextbox.style.top = tmw+pp+"px";
         pmtextbox.style.left = pp+px2+px3+px4*2+"px";
         pmtextbox.value = "";
         pmtextbox.style.display = "block";
         pg = 2;
         console.log( "pg" );
+		log[log.length]='(pm7.js)'+'pg';
     },
     false );
 
     em2.addEventListener( "mousedown",
     function(){
         console.log( "sort" );
+		log[log.length]='(pm7.js)'+'sort';
         pmtextbox.style.top = tmw+pp+"px";
         pmtextbox.style.left = pp+px2+px3+px4*2+"px";
         pmtextbox.value = "";
@@ -25,8 +28,10 @@ function pmaddE(){
     em3.addEventListener( "mousedown",
     function(){
         console.log( "delete pm {" );
+		log[log.length]='(pm7.js)'+'delete pm {';
         let a = pmti.splice( nt, 1 );
         console.log( "pmti", pmti, "a", a );
+		log[log.length]='(pm7.js)'+'pmti'+pmti+'a'+a;
         sendpm( 0, a, pmti, "d" );
         sendcmpc( a, 0, 0, 0, "ad" );
         if( nt >= pmti.length ){
@@ -34,16 +39,17 @@ function pmaddE(){
         }
         rcvpm( pmti[nt], inn, rcvcmpc );
         console.log( "delete pm end }" );
+		log[log.length]='(pm7.js)'+'delete pm end }';
     },
     false );
 
     pmtextbox.addEventListener( "keypress",
     function(e){
-        console.log( "pg", pg );
         if( e.key === "Enter" ){
             if( pg == 2 ){
                 if( pmtextbox.value != "" ){
-                    console.log( "key press" );
+                    console.log( "key press (pm)" );
+					log[log.length]='(pm7.js)'+'key press (pm)';
                     pmtextbox.style.display = "none";
                     sendpm( nt, pmtextbox.value, pmti[ nt ], "en" );
                     pmti[nt] = pmtextbox.value;
@@ -69,6 +75,7 @@ function pmaddE(){
                 pmtextbox.style.display = "none";
                 if( pmtextbox.value != "" ){
                     console.log( "create pm" );
+					log[log.length]='(pm7.js)'+'create pm';
                     sendpm( pmti.length, "", pmtextbox.value, "n" );
                     nt = pmti.length;
                     pmti[pmti.length] = pmtextbox.value;
@@ -82,6 +89,7 @@ function pmaddE(){
                 pg = 0;
             }
             console.log( pg );
+			log[log.length]='(pm7.js)'+pg;
         }
     },
     false );
@@ -91,6 +99,7 @@ function pmaddE(){
         if( e.key === "Enter" ){
             let elm = document.getElementById( e.target.id );
             console.log( "press Enter", "value", elm.value, "nt", nt );
+			log[log.length]='(pm7.js)'+'press Enter'+'value'+elm.value+'nt'+nt;
             sendpm( Number(e.target.id), elm.value, pmti[nt], "o" );
         }
     },
@@ -130,12 +139,16 @@ function pmaddE(){
     pmcvs.addEventListener( "click",
     function(e){
         console.log( "pmcvs.addE click {" )
+		log[log.length]='(pm7.js)'+'pmcvs.addE click {';
         console.log( "pg", pg );
+		log[log.length]='(pm7.js)'+'pg'+pg;
         if( pg == 0 ){
             pfp = setpfp( e.pageX, e.pageY );
             console.log( "pfp", pfp );
+			log[log.length]='(pm7.js)'+'pfp'+pfp;
             let b = 0;
             console.log( "cmpc", cmpc );
+			log[log.length]='(pm7.js)'+'cmpc'+cmpc;
             for( let a = 0; a < cmpc.length/3; a ++ ){
                 if( cmpc[a*3] == pfp ){
                     cfp = a;
@@ -144,6 +157,7 @@ function pmaddE(){
                 }
             }
             console.log( "b", b, "cfp", cfp );
+			log[log.length]='(pm7.js)'+'b'+b+'cfp'+cfp;
             if( b == 0 ){
                 form[pfp].focus();
             }else{
@@ -164,6 +178,7 @@ function pmaddE(){
                 cfp = cmpc.length/3;
                 cmpc[cfp*3] = pfp;
                 console.log( "nd", nd );
+				log[log.length]='(pm7.js)'+'nd'+nd;
                 let t = gettime2( nd );
                 let m = t.getMonth()+1;
                 let d = t.getDate();
@@ -180,6 +195,7 @@ function pmaddE(){
 
         }
         console.log( "pmcvs.addE end }" );
+		log[log.length]='(pm7.js)'+'pmcvs.addE end }';
     },
     false );
 
@@ -188,9 +204,11 @@ function pmaddE(){
     function(){
         if( nt > 0 ){
             console.log( "nt minus" );
+			log[log.length]='(pm7.js)'+'nt minus';
             
             nt --;
             console.log( "nt", nt );
+			log[log.length]='(pm7.js)'+'nt'+nt;
             rcvpm( pmti[nt], inn, rcvcmpc );
         }
     },
@@ -200,9 +218,11 @@ function pmaddE(){
     function(){
         if( nt < pmti.length-1 ){
             console.log( "nt plus" );
+			log[log.length]='(pm7.js)'+'nt plus';
             
             nt ++;
             console.log( "nt", nt );
+			log[log.length]='(pm7.js)'+'nt'+nt;
             rcvpm( pmti[nt], inn, rcvcmpc );
         }
 
@@ -211,6 +231,8 @@ function pmaddE(){
 
     btn2.addEventListener( "mousedown",
     function(){
+        console.log( "btn2 click" );
+		log[log.length]='(pm7.js)'+'btn2 click';
         pmtextbox.style.top = tmw+pp+py3*0.5+ppp+1+"px";
         pmtextbox.style.left = pp+px2+px3+px4*2+py3+ppp*2+2+"px";
         pmtextbox.value = "";
@@ -222,17 +244,21 @@ function pmaddE(){
     btn3.addEventListener( "mousedown",
     function (e){
         console.log( "edit" );
+		log[log.length]='(pm7.js)'+'edit';
         editmenu.style.left=pp+px2+px3+px4*2+"px";
         editmenu.style.top=e.pageY+"px";
         editmenu.style.display="block";
         pg = 1;
         cc = 0;
         console.log( "pg", pg );
+		log[log.length]='(pm7.js)'+'pg'+pg;
     },
     false );
 
     btn4.addEventListener( "mousedown",
     function(){
+        console.log( "check" );
+		log[log.length]='(pm7.js)'+'check';
         if( pg == 6 ){
             btn4.value = "チェックつける";
             pg = 0;
@@ -246,6 +272,7 @@ function pmaddE(){
     pmcvs.addEventListener( "contextmenu",
     function(e){
         console.log( "pm ctxm" );
+		log[log.length]='(pm7.js)'+'pm ctxm';
         pctxm.style.left=e.clientX+"px";
         pctxm.style.top=e.clientY+"px";
         pctxm.style.display="block";
@@ -263,9 +290,12 @@ function pmaddE(){
 
     pctxm1.addEventListener( "mousedown",
     function(){
+        console.log( "pctxm1 click" );
+		log[log.length]='(pm7.js)'+'pctxm1 click';
         sendcmpc( pmti[nt], cmpc[cfp*3], "", "", "d" );
         cmpc.splice( cfp*3, 3 );
         console.log
+		log[log.length]='(pm7.js)'+console.log;
         drowcmp( "d" );
     },
     false );
@@ -273,21 +303,21 @@ function pmaddE(){
 }
 
 function ecmp( x, y ){
+    console.log( "ecmp" );
+	log[log.length]='(pm7.js)'+'ecmp';
     let a = setpfp2( x, y );
-    console.log( "a", a );
     if( a == 0 ){
         cmpc[ cfp*3+1 ] = "";
         pg2 = 7;
-        console.log( "cmpc", cmpc );
     }else{
         cmpc[ cfp*3+2 ] = "";
         pg2 = 8;
-        console.log( "cmpc", cmpc );
     }
 }
 
 function inn(){
     console.log( "inn" );
+	log[log.length]='(pm7.js)'+'inn';
     for( let a = 0; a < 158; a ++ ){
         form[a].value = "";
         if( pm[a] != "" ){
@@ -300,7 +330,8 @@ function inn(){
 
 
 function drowcmp( a ){
-    console.log( "drowcmp{" );
+    console.log( "drowcmp" );
+	log[log.length]='(pm7.js)'+'drowcmp';
     let x = Math.floor( pfp/13 );
     let y = pfp%13;
 
@@ -309,32 +340,31 @@ function drowcmp( a ){
         pcvs.beginPath();
         pcvs.strokeStyle = "red";
         pcvs.lineWidth = 2;
-        console.log( "x", x, "y", y );
         pcvs.moveTo( (x+1)*px1-1, y*py2 );
         pcvs.lineTo( x*px1, (y+1)*py2 );
         pcvs.stroke();
         pcvs.closePath();
 
-        console.log( "font", px7*6 );
         pcvs.font = Math.floor( px7*6 )+"px serif";
         pcvs.fillStyle = "red";
         pcvs.fillText( cmpc[cfp*3+1], x*px1, y*py2+px7*5 );
         pcvs.fillText( cmpc[cfp*3+2], x*px1+px1-px7*7, (y+1)*py2 );
     }
-    console.log( "drowcmp end }" );
 }
 
 function setpfp( x, y ){  //canvasのクリックをtextformに落とし込むためのfp設定
-    console.log( "x", x, "y", y );
+    console.log( "setfp" );
+	log[log.length]='(pm7.js)'+'setfp';
     x = x-pp;
     y = y-tmw-ph1;
-    console.log( "x", x, "y", y );
     let a = Math.floor( x/px1 )*13;
     let b = Math.floor( y/py2 );
     return a+b;
 }
 
 function setpfp2( x, y ){
+    console.log( "setfp2" );
+	log[log.length]='(pm7.js)'+'setfp2';
     let a = Math.floor( pfp/13 );
     let b = pfp%13;
     x = x-pp-a*px1;
@@ -345,3 +375,4 @@ function setpfp2( x, y ){
         return 1;
     }
 }
+

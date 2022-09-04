@@ -1,0 +1,6 @@
+{
+    "log" : "http://localhost/pmtm/log/",
+    "login" : "http://localhost/pmtm/login/",
+    "main" : "http://localhost/pmtm/main/",
+    "tmsheet" : "http://localhost/pmtm/tmsheet/"
+}

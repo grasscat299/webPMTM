@@ -1,4 +1,6 @@
 function page(){
+    console.log( "page {" );
+	log[log.length]='(page2.js)'+'page {';
     //tm
     //canvas数値設定
     wi = window.innerWidth - 2;
@@ -14,7 +16,6 @@ function page(){
     tmcvs.width = wi;
     tmcvs.height = wy*2;
     tmw = wy*2+2+wy/43*12;
-    console.log( "font", font );
 
     //page
     home.style.height = wy/43*12+"px";
@@ -107,12 +108,17 @@ function page(){
     pmtitle.style.top = pp+"px";
     pmtitle.style.left = pp+px2+px3+px4*2+"px";
     pmtitle.style.fontSize = py3/2+"px";
+    console.log( "}" );
+	log[log.length]='(page2.js)'+'}';
 }
 
 function pageaddE(){
+    console.log( "pageaddE {" )
+	log[log.length]='(page2.js)'+'pageaddE {';
     btn5.addEventListener( "mousedown",
     function(){
         console.log( "click btn5" );
+		log[log.length]='(page2.js)'+'click btn5';
         homemenu.style.display = "block";
     },
     false );
@@ -120,14 +126,37 @@ function pageaddE(){
     btn6.addEventListener( "mousedown",
     function(){
         console.log( "click btn6" );
+		log[log.length]='(page2.js)'+'click btn6';
         homemenu.style.display = "none";
     },
     false );
 
     btn7.addEventListener( "mousedown",
     function(){
+        console.log( "click btn7" );
+		log[log.length]='(page2.js)'+'click btn7';
         tsnum = document.getElementById( "tsnum" );
-        window.open( "http://localhost/DPMTM/tmsheet4.html?a="+Number( tsnum.value ), "_blank" );
+        window.open( ajaxurl["tmsheet"]+"tmsheet5.html?"+Number( tsnum.value )+"&"+user, "_blank" );
     },
     false );
+    console.log( "}" );
+	log[log.length]='(page2.js)'+'}';
+
+    $( "#btn8" ).on( "click", 
+        function(){
+            let logs = "";
+            for( let loop of log ){
+                logs += loop+"/";
+            }
+            console.log( "logs", logs );
+            $.ajax({
+                type: "POST",
+                url: ajaxurl["log"]+"createlog.php",
+                data:{ "logs": logs },
+                dataType : "text"
+            }).done( function( data ){
+                console.log( "data", data );
+            })
+        }
+    )
 }
