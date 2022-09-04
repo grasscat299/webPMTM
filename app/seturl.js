@@ -5,7 +5,7 @@ let setajaxurl = ( c ) => {
     if( c == "local" ){
         url = "http://localhost/pmtm/local.json";
     }else{
-        url = "https://pacific-scrubland-78772.herokuapp.com/heroku.json";
+        url = "https://webpmtm.herokuapp.com/heroku.json";
     }
     req.open("GET", url);
     req.onreadystatechange = function(){
