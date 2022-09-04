@@ -33,7 +33,6 @@ let pw=0,pp=0,py1=0,py2=0,py3=0,py4=0,px1=0,px2=0,px3=0,px4=0,px5=0,px6=0,px7=0,
 //page
 let home,homemenu,tsnum;
 let btn5,btn6,btn7,btn8;
-let user,pass;
 
 var log=[];
 
@@ -78,12 +77,21 @@ function(){
     btn7 = document.getElementById( "btn7" );
     btn8 = document.getElementById( "btn8" );
     homemenu = document.getElementById( "homemenu" );
+    
+    $.ajax({
+        type: "POST",
+        url: ajaxurl["login"]+"ac2.php",
+        data:{ "user": user, "pass" : pass },
+        dataType : "text"
+    }).done( function( data ){
+        console.log( "data", data );
+        if( data == "t" ){
 
-    let url = document.location.search;
-    let result = url.replace( /^\?/ , "" );
-    let result2 = result.split( "&" );
-    user = result2[0];
-    pass = result2[1];
+        }else{
+
+        }
+    })
+    
     console.log( "user", user, "pass", pass );
 	log[log.length]='(load7.js)'+'user'+user+'pass'+pass;
 

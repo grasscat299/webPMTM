@@ -26,7 +26,7 @@ $( function(){
 
 function openpage(){
     console.log( "login!" );
-    let newurl = "/main/pmtm1.html?"+username+"&"+password;
+    let newurl = "/pmtm/main/pmtm1.html";
     console.log( "newurl", newurl );
     location.replace(newurl);
 }

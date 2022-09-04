@@ -1,6 +1,6 @@
 <?php
-$user = $_GET[ "user" ];
-$pass = $_GET[ "pass" ];
+$user = $_POST[ "user" ];
+$pass = $_POST[ "pass" ];
 
 $json = file_get_contents( "../test2.json" );
 $sql = json_decode( $json, true );

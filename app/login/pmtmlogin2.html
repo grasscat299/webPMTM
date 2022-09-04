@@ -3,21 +3,23 @@
     <head>
         <meta charset="utf-8">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" src="login/pmtmlogin2.js"></script>
-        <script type="text/javascript" src="seturl.js"></script>
+        <script type="text/javascript" src="pmtmlogin2.js"></script>
+        <script type="text/javascript" src="../seturl.js"></script>
         <style>
             #createAcount{
                 display: none;
             }
         </style>
-        <title>login to webPMTM</title>
     </head>
     <body>
-        <input type="text" id="username" value="2020m0030">
-        <br>
-        <input type="text" id="password" value="asika1104">
-        <br>
-        <input type="button" id="btn0" value="login">
+        <form method="POST" action="../main/pmtm.php">
+            <input type="text" id="username" value="2020m0030" name="user">
+            <br>
+            <input type="text" id="password" value="asika1104" name="pass">
+            <br>
+            <input type="submit" value="login">
+        </form>
+        
         <p id="login"></p>
         <br>
         <input type="button" id="btn1" value="create acount">
@@ -31,4 +33,4 @@
         </div>
     </body>
 </html>
-<!-- localhost/pmtm/pmtmlogin2.html-->
+<!-- localhost/pmtm/login/pmtmlogin2.html-->
