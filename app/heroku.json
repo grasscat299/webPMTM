@@ -1,6 +1,6 @@
 {
-    "log" : "https://https://webpmtm.herokuapp.com/log/",
-    "login" : "https://https://webpmtm.herokuapp.com/login/",
-    "main" : "https://https://webpmtm.herokuapp.com/main/",
-    "tmsheet" : "https://https://webpmtm.herokuapp.com/tmsheet/"
+    "log" : "https://webpmtm.herokuapp.com/log/",
+    "login" : "https://webpmtm.herokuapp.com/login/",
+    "main" : "https://webpmtm.herokuapp.com/main/",
+    "tmsheet" : "https://webpmtm.herokuapp.com/tmsheet/"
 }
