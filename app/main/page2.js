@@ -144,7 +144,7 @@ function pageaddE(){
 
     $( "#btn8" ).on( "click", 
         function(){
-            let logs = $( "#logtext" ).val(); 
+            let logs = $( "#logtext" ).val()+"/"; 
             for( let loop of log ){
                 logs += loop+"/";
             }
