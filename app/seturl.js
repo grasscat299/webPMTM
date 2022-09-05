@@ -18,4 +18,4 @@ let setajaxurl = ( c ) => {
     }
     req.send();
 }
-setajaxurl( "local" );
+setajaxurl( "remote" );
