@@ -2,7 +2,7 @@ function send( item, c ){  //item, c=title or ls
     console.log( "send {" );
 	log[log.length]='(db8.js)'+'send {';
     let req = new XMLHttpRequest();
-    req.open("GET",ajaxurl["main"]+"rcvtm7.php?item="+item+"&c="+c+"&date="+gettime()+"&user="+user );
+    req.open("GET",ajaxurl["main"]+"rcvtm7.php?item="+item+"&c="+c+"&date="+gettime( nd, "string" )+"&user="+user );
     req.onreadystatechange = function(){
         if(req.readyState == 4 && req.status == 200 ){
             console.log( "item", item, "c", c );
