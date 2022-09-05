@@ -179,7 +179,7 @@ function pmaddE(){
                 cmpc[cfp*3] = pfp;
                 console.log( "nd", nd );
 				log[log.length]='(pm7.js)'+'nd'+nd;
-                let t = gettime2( nd );
+                let t = gettime( nd, "data" );
                 let m = t.getMonth()+1;
                 let d = t.getDate();
                 if( m < 10 ) m = "0"+m;
