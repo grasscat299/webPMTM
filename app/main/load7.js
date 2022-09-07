@@ -103,12 +103,7 @@ function(){
     }
     if( user != "" && pass != "" ){
         console.log( "rcvdata" );
-        /*if( accheck() == "t" ){
-            
-            /*
-            rcvtm( nd, tcvs ); //データ取得
-            rcvpmtitle( rcvpm );
-        }*/
+        accheck();
     }
 
     //contextmenu隠す

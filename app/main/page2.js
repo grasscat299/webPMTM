@@ -160,3 +160,18 @@ function pageaddE(){
         }
     )
 }
+
+function accheck(){
+    $.ajax({
+        type: "POST",
+        url: ajaxurl["login"]+"ac2.php",
+        data:{ "user": user, "pass": pass },
+        dataType : "text"
+    }).done( function( data ){
+        console.log( "data", data );
+        if( data == "t" ){
+            rcvtm( nd, tcvs ); //データ取得
+            rcvpmtitle( rcvpm );
+        }
+    })
+}
