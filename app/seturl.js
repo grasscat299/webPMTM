@@ -1,5 +1,6 @@
 var ajaxurl;
 let setajaxurl = ( c ) => {
+    /*
     let req = new XMLHttpRequest();
     let url = "";
     if( c == "local" ){
@@ -16,6 +17,21 @@ let setajaxurl = ( c ) => {
             return;
         }
     }
-    req.send();
+    req.send();*/
+    if( c == "local" ){
+        ajaxurl = {
+            "log" : "http://localhost/app/log/",
+            "login" : "http://localhost/app/login/",
+            "main" : "http://localhost/app/main/",
+            "tmsheet" : "http://localhost/app/tmsheet/"
+        }
+    }else{
+        ajaxurl = {
+            "log" : "https://webpmtm.herokuapp.com/log/",
+            "login" : "https://webpmtm.herokuapp.com/login/",
+            "main" : "https://webpmtm.herokuapp.com/main/",
+            "tmsheet" : "https://webpmtm.herokuapp.com/tmsheet/"
+        }
+    }
 }
-setajaxurl( "remote" );
+setajaxurl( "local" );

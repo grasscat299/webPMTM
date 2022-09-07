@@ -6,7 +6,7 @@ let url = document.location.search;
 
 let tscvs1,tscvs,tstitle,tsdl,tsctxm,tsctxm1,tsctxm2,tstxtbox;
 let tsbtn0;
-let wx=0,wy=0,wh=0,wt=0,wi=0,bh=0,hh=0,dx=0,dh=0,tsx1=0,tsy1=0,wy2=0;
+let wx=0,wy=0,wh=0,wt=0,wi=0,bh=0,hh=0,dx=0,dh=0,tsx1=0,tsy1=0,tsx2=0,tsy2=0,ha=0,tx=0,ty=0,ax1=0,ax2=0,ay1=0,ay2=0,ay3=0,ay4=0;
 let ls=[],title=[],dai=[];
 for( let a = 0; a < 7; a ++ ){
     ls[a]=[];
@@ -269,27 +269,81 @@ function settscvs(){
     console.log( "settmcvs(){" );
     console.log( "innerwidth", window.innerWidth );
     wi = window.innerWidth - 39;
-    tsx1 = wi/594*21;
-    wi -= tsx1*2;
+    tsx1 = wi/210*20;
+    tsy1 = wi/210*19;
+    tsx2 = wi/210*5;
+    tsy2 = wi/210*9;
+    ha = wi/210*11;
+    ay1 = wi/210*5;
+    ay2 = wi/210*24;
+    ay3 = ay2/2;
+    ax2 = wi/210*16;
+    wi -= tsx1+tsx2;
+    ax1 = wi-ax2*2;
+    ay4 = ay2/3;
 
-    wh = wi/23;
-    wt = wi/8;
+    wh = wi/184*8;
     wx = wi/184*153/96;
     wy = wi/23*2;
     bh = wh/2;
     hh = wy*2 - bh*2;
     dx = ( wh-2 )/4;
     dh = (hh-dx*4)/2+bh;
+    tx = wi/184*23/5;
+    ty = wy/2;
     font = wi/80;
     
-    tsy1 = tsx1;
-    tscvs1.width = wi+tsx1*2;
-    tscvs1.height = wy*2*7+tsy1*2;
-    tscvs1.style.width = wi+tsx1*2+"px";
-    tscvs1.style.height = wy*14+tsy1*2+"px";
+    tscvs1.width = wi+tsx1+tsx2;
+    tscvs1.height = ha+wy*2*7+tsy1+tsy2+ay1+ay2;
+    tscvs1.style.width = wi+tsx1+tsx2+"px";
+    tscvs1.style.height = ha+wy*2*7+tsy1+tsy2+ay1+ay2+"px";
     console.log( "}" );
     tscvs.fillStyle = "#fff";
-    tscvs.fillRect( 0, 0, wi+tsx1*2, wy*14+tsy1*2 );
+    tscvs.fillRect( 0, 0, wi+tsx1+tsx2, wy*14+tsy1+ha+ay1+ay2+tsy2 );
+
+    tscvs.beginPath();
+    tscvs.setLineDash( ["",""]);
+    tscvs.moveTo( tsx1, tsy1 );
+    tscvs.lineTo( tsx1, tsy1+ha );
+
+    tscvs.moveTo( tsx1, tsy1 );
+    tscvs.lineTo( tsx1+wi, tsy1 );
+
+    tscvs.moveTo( tsx1+wi, tsy1 );
+    tscvs.lineTo( tsx1+wi, tsy1+ha );
+
+    tscvs.moveTo( tsx1, tsy1+ha );
+    tscvs.lineTo( tsx1+wi, tsy1+ha );
+
+    tscvs.moveTo( tsx1, tsy1+ha+wy*2*7+ay1 );
+    tscvs.lineTo( tsx1+wi, tsy1+ha+wy*2*7+ay1 );
+    tscvs.lineTo( tsx1+wi, tsy1+ha+wy*2*7+ay1+ay2 );
+    tscvs.lineTo( tsx1, tsy1+ha+wy*2*7+ay1+ay2 );
+    tscvs.lineTo( tsx1, tsy1+ha+wy*2*7+ay1 );
+
+    tscvs.moveTo( tsx1+ax1, tsy1+ha+wy*2*7+ay1 );
+    tscvs.lineTo( tsx1+ax1, tsy1+ha+wy*2*7+ay1+ay2 );
+
+    tscvs.moveTo( tsx1+ax1+ax2, tsy1+ha+wy*2*7+ay1 );
+    tscvs.lineTo( tsx1+ax1+ax2, tsy1+ha+wy*2*7+ay1+ay2 );
+
+    tscvs.moveTo( tsx1+ax1, tsy1+ha+wy*2*7+ay1+ay3 );
+    tscvs.lineTo( tsx1+wi, tsy1+ha+wy*2*7+ay1+ay3 );
+
+    tscvs.stroke();
+    tscvs.closePath();
+
+    tscvs.beginPath();
+    tscvs.setLineDash( [ 5, 5 ] );
+
+    tscvs.moveTo( tsx1*1.05, tsy1+ha+wy*2*7+ay1+ay4 );
+    tscvs.lineTo( tsx1*0.95+ax1, tsy1+ha+wy*2*7+ay1+ay4 );
+
+    tscvs.moveTo( tsx1*1.05, tsy1+ha+wy*2*7+ay1+ay4*2 );
+    tscvs.lineTo( tsx1*0.95+ax1, tsy1+ha+wy*2*7+ay1+ay4*2 );
+
+    tscvs.stroke();
+    tscvs.closePath();
 }
 
 function gettime3( n, c ){

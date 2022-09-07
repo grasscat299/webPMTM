@@ -77,36 +77,39 @@ function(){
     btn7 = document.getElementById( "btn7" );
     btn8 = document.getElementById( "btn8" );
     homemenu = document.getElementById( "homemenu" );
-    
-    $.ajax({
-        type: "POST",
-        url: ajaxurl["login"]+"ac2.php",
-        data:{ "user": user, "pass" : pass },
-        dataType : "text"
-    }).done( function( data ){
-        console.log( "data", data );
-        if( data == "t" ){
-
-        }else{
-
-        }
-    })
-    
-    console.log( "user", user, "pass", pass );
-	log[log.length]='(load7.js)'+'user'+user+'pass'+pass;
 
 
     //tm読込
     page();
     nd = 0;
-    rcvtm( nd, tcvs ); //データ取得
-
-    //pm読込
-    rcvpmtitle( rcvpm );  
-
     tmaddE();
     pmaddE();
     pageaddE();
+
+
+    let filecookie = document.cookie;
+    console.log( filecookie );
+    if( filecookie != "" ){
+        let filecookie1 = filecookie.split( "; " );
+        for( let ckie of filecookie1 ){
+            let ckie1 =  ckie.split( "=" );
+            if( ckie1[0] == "user" ){
+                user = ckie1[1];
+            }
+            if( ckie1[0] == "pass" ){
+                pass = ckie1[1];
+            }
+        }
+    }
+    if( user != "" && pass != "" ){
+        console.log( "rcvdata" );
+        /*if( accheck() == "t" ){
+            
+            /*
+            rcvtm( nd, tcvs ); //データ取得
+            rcvpmtitle( rcvpm );
+        }*/
+    }
 
     //contextmenu隠す
     document.body.addEventListener('click',

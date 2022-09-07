@@ -26,12 +26,11 @@ $( function(){
 
 function openpage(){
     console.log( "login!" );
-    let newurl = "/pmtm/main/pmtm1.html";
-    console.log( "newurl", newurl );
-    location.replace(newurl);
+    $("#sendpmtm").submit();
 }
 
 function acountCheck( user, pass, f1 ){
+    /*
     let req = new XMLHttpRequest();
     req.open("GET",ajaxurl["login"]+"ac2.php?user="+user+"&pass="+pass );
     req.onreadystatechange = function(){
@@ -48,6 +47,21 @@ function acountCheck( user, pass, f1 ){
         }
     };
     req.send();
+    */
+    console.log( "acountcheck" );
+    $.ajax({
+        type: "POST",
+        url: ajaxurl["login"]+"ac2.php",
+        data:{ "user": user, "pass" : pass },
+        dataType : "text"
+    }).done( function( data ){
+        console.log( "data", data );
+        if( data == "t" ){
+            f1();
+        }else{
+
+        }
+    })
 }
 
 function createAcount( user, pass, f1 ){
