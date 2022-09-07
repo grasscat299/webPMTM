@@ -34,4 +34,4 @@ let setajaxurl = ( c ) => {
         }
     }
 }
-setajaxurl( "local" );
+setajaxurl( "remote" );
